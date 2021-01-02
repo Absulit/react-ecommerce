@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import HatsPage from './pages/hatspage/hatspage.component';
 import Shop from './pages/shop/shop.component';
 import Header from './components/header/header.component';
+import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up';
 
 class App extends React.Component {
   constructor(props) {
@@ -34,6 +35,7 @@ class App extends React.Component {
           <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={Shop} />
           <Route path="/shop/hats" component={HatsPage} />
+          <Route path="/signin" component={SignInAndSignUp} />
         </Switch>
       </div>
     );
