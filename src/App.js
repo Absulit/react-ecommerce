@@ -51,8 +51,6 @@ class App extends React.Component {
       }
 
       this.setState({currentUser: userAuth}); // userAuth is null
-
-      //console.log(user);
     })
   }
 
