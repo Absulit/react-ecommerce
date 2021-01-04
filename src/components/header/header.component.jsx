@@ -3,7 +3,8 @@ import './header.styles.scss';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { Link } from 'react-router-dom';
 import { auth } from './../../firebase/firebase.utils';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+import CartIcon from '../cart-icon/cart-icon.component';
 
 const Header = ({ currentUser }) => {
     console.log("----", currentUser);
@@ -29,14 +30,14 @@ const Header = ({ currentUser }) => {
                     :
                     <Link className="options" to="/signin">SIGN IN</Link>
             }
-
+            <CartIcon />
         </div>
 
     );
 }
 
 const mapStateToProps = state => {
-    return({
+    return ({
         currentUser: state.user.currentUser
     });
 }
