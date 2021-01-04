@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 
-const Header = ({ currentUser }) => {
+const Header = ({ currentUser, hidden }) => {
     console.log("----", currentUser);
     return (
         <div className="header">
@@ -30,16 +30,31 @@ const Header = ({ currentUser }) => {
                 }
                 <CartIcon />
             </div>
-            <CartDropdown/>
+            {
+                hidden ? null : <CartDropdown />
+
+            }
 
         </div>
 
     );
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = ({ state: currentUser, cart: { hidden } }) => {
+
+    /**
+     * because of the new destructure, we have currentUser and hidden 
+     * as separate variables, and since they have the same name
+     * we use the property only instead of key value
+     */
+    /*return ({
+        currentUser: currentUser,
+        hidden: hidden
+    });*/
+
     return ({
-        currentUser: state.user.currentUser
+        currentUser,
+        hidden
     });
 }
 
