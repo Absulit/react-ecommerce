@@ -8,7 +8,7 @@ import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 
 const Header = ({ currentUser, hidden }) => {
-    console.log("----", currentUser);
+    console.log("----Header, currentUser", currentUser);
     return (
         <div className="header">
             <Link className="logo-container" to="/">
@@ -40,7 +40,7 @@ const Header = ({ currentUser, hidden }) => {
     );
 }
 
-const mapStateToProps = ({ state: currentUser, cart: { hidden } }) => {
+const mapStateToProps = ({ user: {currentUser}, cart: { hidden } }) => {
 
     /**
      * because of the new destructure, we have currentUser and hidden 
