@@ -1,11 +1,16 @@
 import React from 'react';
 import './header.styles.scss';
-import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { Link } from 'react-router-dom';
-import { auth } from './../../firebase/firebase.utils';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from "reselect";
+
+import { auth } from './../../firebase/firebase.utils';
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
+import { selectCartHidden } from "../../redux/cart/cart.selectors";
+import { selectCurrentUser } from "../../redux/user/user.selector";
+
+import { ReactComponent as Logo } from '../../assets/crown.svg';
 
 const Header = ({ currentUser, hidden }) => {
     console.log("----Header, currentUser", currentUser);
@@ -40,10 +45,11 @@ const Header = ({ currentUser, hidden }) => {
     );
 }
 
-const mapStateToProps = ({ user: {currentUser}, cart: { hidden } }) => {
+//const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => {
+const mapStateToProps = (state) => createStructuredSelector({
 
     /**
-     * because of the new destructure, we have currentUser and hidden 
+     * because of the new destructure, we have currentUser and hidden
      * as separate variables, and since they have the same name
      * we use the property only instead of key value
      */
@@ -52,10 +58,8 @@ const mapStateToProps = ({ user: {currentUser}, cart: { hidden } }) => {
         hidden: hidden
     });*/
 
-    return ({
-        currentUser,
-        hidden
-    });
-}
+    currentUser: selectCurrentUser,
+    hidden: selectCartHidden
+})
 
 export default connect(mapStateToProps)(Header);
