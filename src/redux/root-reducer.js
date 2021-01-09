@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import storage from "redux-persist/lib/storage"; // the local storage
 
 import cartReducer from './cart/cart.reducer.js';
 import userReducer from './user/user.reducer.js';
