@@ -1,12 +1,12 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import { Link } from 'react-router-dom';
 
 // for repeated blocks
-const OptionContainerStyles = css`
+/*const OptionContainerStyles = css`
     padding: 10px 15px;
     cursor: pointer;
-`;
+`;*/
 
 const HeaderContainer = styled.div`
     height: 70px;
@@ -31,12 +31,10 @@ const OptionsContainer = styled.div`
 `;
 
 const OptionLink = styled(Link)`
-    ${OptionContainerStyles}
+    padding: 10px 15px;
+    cursor: pointer;
 `;
 
-const OptionDiv = styled.div`
-    ${OptionContainerStyles}
-`;
 
-export { HeaderContainer, LogoContainer, OptionsContainer, OptionLink, OptionDiv};
+export { HeaderContainer, LogoContainer, OptionsContainer, OptionLink};
 
