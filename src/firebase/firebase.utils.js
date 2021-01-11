@@ -59,6 +59,24 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => 
     return await batch.commit()
 }
 
+/**
+ * Converts a list snapshots to map
+ * @param {*} collections the list
+ */
+export const convertCollectionsSnapshotToMap = (collections) => {
+    const transformedCollection = collections.docs.map(doc => {
+        const { title, items } = doc.data();
+
+        return {
+            routeName: encodeURI(title.toLocaleLowerCase()),
+            id: doc.id,
+            title,
+            items
+        }
+    });
+
+    console.log('---- transformedCollection', transformedCollection)
+}
 
 firebase.initializeApp(config);
 
