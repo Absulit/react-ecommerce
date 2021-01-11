@@ -23,13 +23,31 @@ class Shop extends React.Component {
         console.log('---- Shop, componentDidMount');
         const collectionRef = firestore.collection('collections');
 
-        this.unsubscribeFromSnapshot = collectionRef.onSnapshot(async snapshot => {
+        // subscribe
+        /*this.unsubscribeFromSnapshot = collectionRef.onSnapshot(async snapshot => {
+            console.log('---- Shop, componentDidMount, snapshot', snapshot);
+            const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
+            console.log('---- Shop, componentDidMount, collectionsMap', collectionsMap);
+            updateCollections(collectionsMap);
+            this.setState({ loading: false });
+        });*/
+
+        // promise
+        collectionRef.get().then(snapshot => {
             console.log('---- Shop, componentDidMount, snapshot', snapshot);
             const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
             console.log('---- Shop, componentDidMount, collectionsMap', collectionsMap);
             updateCollections(collectionsMap);
             this.setState({ loading: false });
         });
+
+
+        // fetch
+        /*fetch('https://firestore.googleapis.com/v1/projects/react-ecommerce-absulit/databases/(default)/documents/collections')
+            .then(response => response.json())
+            .then(data => console.log(data));*/
+
+
     }
 
     render() {
