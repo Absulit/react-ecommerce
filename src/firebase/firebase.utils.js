@@ -75,7 +75,11 @@ export const convertCollectionsSnapshotToMap = (collections) => {
         }
     });
 
-    console.log('---- transformedCollection', transformedCollection)
+    console.log('---- transformedCollection', transformedCollection);
+    return transformedCollection.reduce((accumulator, collection) => {
+        accumulator[collection.title.toLocaleLowerCase()] = collection;
+        return accumulator;
+    }, {});
 }
 
 firebase.initializeApp(config);
