@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import CollectionsOverview from '../../components/colletions-overview/collections-overview.component';
 import WithSpinner from '../../components/with-spinner/with-spinner.component';
-import { selectIsCollectionFetching } from '../../redux/shop/shop.selectors';
+import { selectIsCollectionFetching, selectIsCollectionsLoaded } from '../../redux/shop/shop.selectors';
 import Collection from '../collection/collection.component';
 import { fetchCollectionsStartAsync } from './../../redux/shop/shop.actions';
 
@@ -56,14 +56,14 @@ class Shop extends React.Component {
 
     render() {
         console.log('---- Shop, render');
-        const { match, isCollectionFetching } = this.props;
+        const { match, isCollectionFetching, isCollectionsLoaded } = this.props;
         //const { loading } = this.state;
         return (
             <div className="shop-page">
                 {/* <Route exact path={`${match.path}`} component={CollectionsOverview} /> */}
-                <Route exact path={`${match.path}`} render={(props) => <CollectionsOverviewWithSpiner isLoading={isCollectionFetching} {...props} />} />
+                <Route exact path={`${match.path}`} render={(props) => <CollectionsOverviewWithSpiner isLoading={!isCollectionsLoaded} {...props} />} />
                 {/* <Route path={`${match.path}/:collectionId`} component={Collection} /> */}
-                <Route path={`${match.path}/:collectionId`} render={(props) => <CollectionPageWithSpinner isLoading={isCollectionFetching} {...props} />} />
+                <Route path={`${match.path}/:collectionId`} render={(props) => <CollectionPageWithSpinner isLoading={!isCollectionsLoaded} {...props} />} />
             </div>
         )
     }
@@ -71,7 +71,8 @@ class Shop extends React.Component {
 
 const mapStateToProps = createStructuredSelector(
     {
-        isCollectionFetching: selectIsCollectionFetching
+        isCollectionFetching: selectIsCollectionFetching,
+        isCollectionsLoaded: selectIsCollectionsLoaded
     }
 )
 
