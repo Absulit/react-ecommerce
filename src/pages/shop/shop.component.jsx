@@ -2,14 +2,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
-import CollectionsOverview from '../../components/colletions-overview/collections-overview.component';
+//import CollectionsOverview from '../../components/colletions-overview/collections-overview.component';
 import WithSpinner from '../../components/with-spinner/with-spinner.component';
 import { selectIsCollectionFetching, selectIsCollectionsLoaded } from '../../redux/shop/shop.selectors';
 import Collection from '../collection/collection.component';
 import { fetchCollectionsStartAsync } from './../../redux/shop/shop.actions';
+import CollectionsOverviewContainer from './../../components/colletions-overview/collections-overview.container';
+import CollectionsPageContainer from './../collection/collection.container';
 
-const CollectionsOverviewWithSpiner = WithSpinner(CollectionsOverview);
-const CollectionPageWithSpinner = WithSpinner(Collection);
+//const CollectionsOverviewWithSpiner = WithSpinner(CollectionsOverview);
+//const CollectionPageWithSpinner = WithSpinner(Collection);
 
 class Shop extends React.Component {
 
@@ -23,7 +25,7 @@ class Shop extends React.Component {
         console.log('---- Shop, componentDidMount');
         const { fetchCollectionsStartAsync } = this.props;
         fetchCollectionsStartAsync();
-        
+
         //const { updateCollections } = this.props;
         //const collectionRef = firestore.collection('collections');
 
@@ -56,14 +58,17 @@ class Shop extends React.Component {
 
     render() {
         console.log('---- Shop, render');
-        const { match, isCollectionFetching, isCollectionsLoaded } = this.props;
+        //const { match, isCollectionFetching, isCollectionsLoaded } = this.props;
+        const { match } = this.props;
         //const { loading } = this.state;
         return (
             <div className="shop-page">
                 {/* <Route exact path={`${match.path}`} component={CollectionsOverview} /> */}
-                <Route exact path={`${match.path}`} render={(props) => <CollectionsOverviewWithSpiner isLoading={!isCollectionsLoaded} {...props} />} />
+                {/* <Route exact path={`${match.path}`} render={(props) => <CollectionsOverviewWithSpiner isLoading={!isCollectionsLoaded} {...props} />} /> */}
+                <Route exact path={`${match.path}`} component={CollectionsOverviewContainer} />
                 {/* <Route path={`${match.path}/:collectionId`} component={Collection} /> */}
-                <Route path={`${match.path}/:collectionId`} render={(props) => <CollectionPageWithSpinner isLoading={!isCollectionsLoaded} {...props} />} />
+                {/* <Route path={`${match.path}/:collectionId`} render={(props) => <CollectionPageWithSpinner isLoading={!isCollectionsLoaded} {...props} />} /> */}
+                <Route path={`${match.path}/:collectionId`} component={CollectionsPageContainer} />
             </div>
         )
     }
